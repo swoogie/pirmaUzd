@@ -4,35 +4,56 @@ using namespace std;
 
 int main()
 {
-    setlocale(LC_ALL, "Lithuanian");
     string vardas;
+    int plotis;
+    cout << "iveskite varda: ";
     cin >> vardas;
-    string eil1;
-    string eil2="*";
-    string eil3;
-    string eil4="*";
-    string eil5;
-    if(vardas.back()=='e' or vardas.back()=='a')
-    eil3 = "* Sveika, " + vardas + "! *";
-    else
-    eil3 = "* Sveikas, " + vardas + "! *";
+    cout << "iveskite ploti: ";
+    cin >> plotis;
+    while(plotis < 4)
+    {
+        cout << "plotis per mazas, iveskite 4 < ploti: " << endl;
+        cin >> plotis;
+    }
+    
+    int centras = plotis/2;
+    string *stringMasyvas = new string[plotis+1];
 
-    int zvaigzdutes = eil3.length();
-     
+    if(vardas.back()=='e' or vardas.back()=='a')
+    stringMasyvas[centras] = "* Sveika, " + vardas + "! *";
+    else
+    stringMasyvas[centras] = "* Sveikas, " + vardas + "! *";
+    int zvaigzdutes = stringMasyvas[centras].length();
     for(int i=0;i<zvaigzdutes;i++)
     {
-        eil1+="*";
-        eil5+="*";
+        //cout << i << endl;
+        stringMasyvas[0]+="*";
+        stringMasyvas[plotis]+="*";
     }
-    for(int i=0;i<zvaigzdutes-2;i++)
+    
+    for(int i=1;i<centras;i++)
     {
-        eil2+=" ";
-        eil4+=" ";
+        stringMasyvas[i]="*";
+        for(int j=0;j<zvaigzdutes-2;j++)
+        {
+            stringMasyvas[i]+=" ";
+        }
+        stringMasyvas[i]+="*";
     }
-    eil2+="*";
-    eil4+="*";
 
-    cout << eil1 << endl << eil2 << endl << eil3 << endl << eil4 << endl << eil5;
-
-
+    for(int i=centras+1;i<plotis;i++)
+    {
+        stringMasyvas[i]="*";
+        for(int j=0;j<zvaigzdutes-2;j++)
+        {
+            stringMasyvas[i]+=" ";
+        }
+        stringMasyvas[i]+="*";
+    }
+    
+    for(int i=0;i<plotis+1;i++)
+    {
+        cout << stringMasyvas[i] << endl;
+    }
+    delete [] stringMasyvas;
 }
